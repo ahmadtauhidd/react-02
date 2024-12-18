@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root" style="display: flex;">
+
+    </div>
+
+    <script type="text/babel">
+        const container = document.getElementById("root");
+        const root = ReactDOM.createRoot(container);
+
+        function Welcome() {
+            return <h1>Hello, Rifai!</h1>;
+        }
+
+        function Greeting(props) {
+            return <h1>Hello, {props.name}!</h1>;
+        }
+
+        function Counter() {
+            const [likes, setlikes] = React.useState(0);
+
+            const increment = () => {
+                setlikes(likes + 1);
+            };
+            const decrement = () => {
+                setlikes(likes - 1);
+            };
+
+            return (
+                <div>
+                    <button onClick={increment}>+</button>
+                    <h1>likes: {likes}</h1>
+                    <button onClick={decrement}>-</button>
+                </div>
+            );
+        }
+
+        function Greetings(props) {
+            const isLoggedIn = props.isLoggedIn;
+            return (
+                <div>
+                    {isLoggedIn ? (
+                        <h1>Welcome back!</h1>
+                    ) : (
+                        <h1>Please log in.</h1>
+                    )}
+                </div>
+            );
+        }
+
+        function IdList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((number) =>
+                <li key={number.toString()}>
+                    {number}
+                </li>
+            );
+
+            return (
+                <ul>{listItems}</ul>
+            );
+        }
+        const id = [1, 2, 3, 4, 5];
+
+        function BioForm() {
+            const [value, setValue] = React.useState('');
+
+            const handleChange = (event) => {
+                setValue(event.target.value);
+            }
+
+            const handleSubmit = (event) => {
+                alert('Nama yang diinput: ' + value);
+                event.preventDefault();
+            }
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Nama:
+                        <input type="text" value={value} onChange={handleChange} />
+                    </label>
+                    <button type="submit">Submit</button>
+                </form>
+            );
+        }
+        
+        root.render(<BioForm />);
+    </script>
+</body>
+
+</html>
